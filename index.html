@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./icon.svg" type="image/x-icon">
+    <title>Quebra de Chave de Acesso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cabecalho">
+        <h2>Quebrar Chave de Acesso da Nota Fiscal</h2>
+        <p>Utilize esta ferramenta para quebrar a chave de acesso e verificar a autenticidade, garantindo que o formato da chave esteja consistente e detalhando sua composição.</p>
+    </div>
+    <div class="card">
+        <form id="chaveForm">
+            <label for="chaveInput">Digite a Chave de Acesso (44 dígitos):</label>
+            <input type="text" id="chaveInput" maxlength="44" required>
+            <button type="submit">Quebrar chave</button>
+        </form>
+        <div id="resultado"></div>
+    </div>
+    <footer>Desenvolvido por UXpert Soluções Digitais</footer>
+    <script>
+
+        function nomeDoMes(mes) {
+            const meses = [
+                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            ];
+            return meses[parseInt(mes) - 1];
+        }
+
+        function quebrarChave(chave) {
+            const ano = chave.substring(2, 4);
+            const mesNumero = chave.substring(4, 6);
+            const mesNome = nomeDoMes(mesNumero);
+
+            return {
+                uf: chave.substring(0, 2),
+                ano: `20${ano}`,
+                mes: mesNome,
+                cnpj: chave.substring(6, 20),
+                modelo: chave.substring(20, 22),
+                serie: chave.substring(22, 25),
+                numero: chave.substring(25, 34),
+                codigoNumerico: chave.substring(34, 42),
+                digitoVerificador: chave.substring(42, 43)
+            };
+        }
+
+        document.getElementById('chaveForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const chaveInput = document.getElementById('chaveInput').value;
+
+            if (chaveInput.length !== 44 || isNaN(chaveInput)) {
+                alert("A chave de acesso deve conter exatamente 44 dígitos numéricos.");
+                return;
+            }
+
+            const partes = quebrarChave(chaveInput);
+
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `
+                <p><strong>UF (Estado):</strong> ${partes.uf}</p>
+                <p><strong>Ano de Emissão:</strong> ${partes.ano}</p>
+                <p><strong>Mês de Emissão:</strong> ${partes.mes}</p>
+                <p><strong>CNPJ do Emitente:</strong> ${partes.cnpj}</p>
+                <p><strong>Modelo do Documento:</strong> ${partes.modelo}</p>
+                <p><strong>Série:</strong> ${partes.serie}</p>
+                <p><strong>Número do Documento:</strong> ${partes.numero}</p>
+                <p><strong>Código Numérico:</strong> ${partes.codigoNumerico}</p>
+                <p><strong>Dígito Verificador:</strong> ${partes.digitoVerificador}</p>
+            `;
+        });
+    </script>
+</body>
+
+</html>
