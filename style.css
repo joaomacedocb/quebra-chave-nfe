@@ -2,7 +2,6 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-x: hidden;
 }
 
 body {
@@ -41,9 +40,10 @@ body {
     background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     border-radius: 10px;
-    width: 80%;
+    width: 95%;
     height: fit-content;
-    padding: 4rem 0 4rem 0;
+    padding: 2rem 0 2rem 0;
+    margin: 2rem 0 2rem 0;
 }
 
 #chaveInput {
@@ -54,6 +54,7 @@ body {
     border-radius: 20px;
     font-size: 16px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 button {
@@ -79,7 +80,7 @@ form {
     align-items: center;
     justify-content: space-around;
     gap: 10px;
-    width: 60%;
+    width: 80%;
     margin: 20px auto;
 }
 
@@ -92,12 +93,58 @@ form {
     justify-content: space-between;
 }
 
+#copiarDados {
+    margin-top: 1rem;
+    border: 2px solid #004080;
+    background-color: rgba(255, 255, 255, 0.0);
+    color: #004080;
+    box-shadow: none;
+}
+
 footer {
     background-color: #001f3f;
     color: white;
     width: 100%;
     position: relative;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 1rem 0 1rem 0;
     text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+
+
+    .cabecalho h2 {
+        width: 80%;
+    }
+
+    .cabecalho p {
+        width: 80%;
+    }
+
+    .card {
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    input {
+        height: 8rem;
+        text-align: left;
+        vertical-align: top;
+        box-sizing: initial;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 1000px;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 8px;
+    }
 }
